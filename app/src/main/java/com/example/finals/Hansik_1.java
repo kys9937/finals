@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class Hansik_1 extends AppCompatActivity {
@@ -13,6 +15,8 @@ public class Hansik_1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hansik_1);
+
+
 
         Integer[][] picture = {{R.drawable.h1, R.drawable.h2, R.drawable.h3, R.drawable.h4,
                 R.drawable.h5,R.drawable.h6,R.drawable.h7,R.drawable.h8},
@@ -56,7 +60,7 @@ public class Hansik_1 extends AppCompatActivity {
                 }
        };
         ImageView image;
-
+        Button btn_bookmk;//즐겨찾기 버튼
 
         image = (ImageView) findViewById(R.id.image);
 
@@ -68,7 +72,18 @@ public class Hansik_1 extends AppCompatActivity {
 
         image.setImageResource(picture[Index_MainMenu][Index_hansik]);//선택한 버튼의 사진으로 바꾸기
 
+        btn_bookmk = (Button) findViewById(R.id.btn_bookmk);//즐겨찾기 버튼
 
+        btn_bookmk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Bookmark.class);
+                intent.putExtra("Index_MainMenu", Index_MainMenu);
+                intent.putExtra("Index_Hansik", Index_hansik);
+                startActivity(intent);
+
+            }
+        });
 
         image.setOnClickListener(view -> {//유튜브 가기
             String url = youtube[Index_MainMenu][Index_hansik];
